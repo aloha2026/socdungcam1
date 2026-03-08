@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>🐿️ Sóc Con Dũng Cảm</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF8EE;
+  --bg2:#FFF3E0;
+  --orange:#FF7A00;
+  --orange2:#FF9B3D;
+  --yellow:#FFD93D;
+  --green:#4CAF50;
+  --red:#FF5252;
+  --purple:#7C4DFF;
+  --blue:#2196F3;
+  --dark:#2D1B00;
+  --mid:#7A5000;
+  --light:#FFE0A3;
+  --card:#FFFFFF;
+  --shadow:0 4px 20px rgba(255,122,0,.15);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Baloo 2',cursive;background:var(--bg);min-height:100vh;color:var(--dark);overflow-x:hidden}
+.app{max-width:480px;margin:0 auto;padding-bottom:90px;position:relative}
+
+/* ── HEADER ── */
+.header{background:linear-gradient(160deg,#FF7A00,#FF9B3D);padding:18px 18px 14px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,.1);border-radius:50%}
+.header::after{content:'';position:absolute;bottom:-20px;left:40px;width:80px;height:80px;background:rgba(255,255,255,.08);border-radius:50%}
+.header-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.app-title{font-size:20px;font-weight:900;color:white;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.app-title span{font-size:24px}
+.header-badges{display:flex;gap:6px}
+.hbadge{background:rgba(255,255,255,.25);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:800;color:white}
+
+/* LION DISPLAY */
+.lion-area{display:flex;align-items:center;gap:16px;margin-top:12px;position:relative;z-index:1}
+.lion-wrap{position:relative;flex-shrink:0}
+.lion-body{font-size:64px;line-height:1;transition:transform .3s;cursor:pointer;filter:drop-shadow(0 4px 12px rgba(0,0,0,.2))}
+.lion-body:hover{transform:scale(1.1) rotate(-5deg)}
+.lion-body.celebrate{animation:lionCel .5s ease-in-out}
+@keyframes lionCel{0%,100%{transform:scale(1)}50%{transform:scale(1.2) rotate(10deg)}}
+.lion-level-badge{position:absolute;bottom:-4px;right:-4px;background:var(--yellow);border:3px solid white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--dark)}
+.lion-info{flex:1}
+.lion-name{font-size:16px;font-weight:900;color:white;margin-bottom:3px}
+.lion-msg{font-size:12px;color:rgba(255,255,255,.85);font-weight:700;margin-bottom:8px;line-height:1.3}
+.xp-bar-wrap{background:rgba(0,0,0,.2);border-radius:20px;height:10px;overflow:hidden;position:relative}
+.xp-bar{height:100%;background:linear-gradient(90deg,#FFD93D,#FF9B3D);border-radius:20px;transition:width .6s cubic-bezier(.34,1.56,.64,1);position:relative}
+.xp-bar::after{content:'';position:absolute;top:2px;left:4px;right:4px;height:3px;background:rgba(255,255,255,.4);border-radius:10px}
+.xp-label{font-size:10px;color:rgba(255,255,255,.8);font-weight:800;margin-top:3px}
+
+/* TABS */
+.tabs{display:flex;background:white;border-bottom:2px solid var(--light);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:60px;border:none;background:none;padding:11px 6px 9px;font-family:'Baloo 2',cursive;font-weight:800;font-size:11px;color:var(--mid);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange)}
+
+.content{padding:14px 14px 0}
+.section{display:none}.section.active{display:block}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
+.card-title{font-size:14px;font-weight:900;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+
+/* ── TIMER ── */
+.timer-card{background:linear-gradient(135deg,#FF7A00,#FF5722);border-radius:24px;padding:20px;margin-bottom:14px;text-align:center;box-shadow:0 8px 28px rgba(255,122,0,.35)}
+.timer-mode-row{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+.tmode{border:none;border-radius:20px;padding:6px 14px;font-family:'Baloo 2',cursive;font-weight:800;font-size:12px;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.2);color:white}
+.tmode.active{background:white;color:var(--orange)}
+.timer-display{font-size:72px;font-weight:900;color:white;line-height:1;text-shadow:0 4px 16px rgba(0,0,0,.2);letter-spacing:-2px;margin-bottom:6px;font-family:'Nunito',sans-serif}
+.timer-sub{font-size:13px;color:rgba(255,255,255,.8);font-weight:700;margin-bottom:16px}
+.timer-circle-wrap{position:relative;width:160px;height:160px;margin:0 auto 16px}
+.timer-svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.tc-bg{fill:none;stroke:rgba(255,255,255,.2);stroke-width:8}
+.tc-fill{fill:none;stroke:white;stroke-width:8;stroke-linecap:round;stroke-dasharray:440;stroke-dashoffset:0;transition:stroke-dashoffset .5s ease}
+.timer-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.timer-big{font-size:44px;font-weight:900;color:white;line-height:1;font-family:'Nunito',sans-serif}
+.timer-tiny{font-size:11px;color:rgba(255,255,255,.7);font-weight:800}
+.timer-btns{display:flex;gap:10px;justify-content:center}
+.tbtn{border:none;border-radius:16px;padding:12px 24px;font-family:'Baloo 2',cursive;font-weight:900;font-size:14px;cursor:pointer;transition:all .2s}
+.tbtn:active{transform:scale(.94)}
+.tbtn-start{background:white;color:var(--orange);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.tbtn-stop{background:rgba(255,255,255,.25);color:white;border:2px solid rgba(255,255,255,.4)}
+.tbtn-reset{background:rgba(255,255,255,.15);color:white}
+.session-dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.sdot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .3s}
+.sdot.done{background:#FFD93D}
+
+/* ── TASKS ── */
+.task-add-row{display:flex;gap:8px;margin-bottom:12px}
+.task-inp{flex:1;background:#FFF8EE;border:2px solid var(--light);border-radius:14px;padding:10px 14px;font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;color:var(--dark);outline:none;transition:border .2s}
+.task-inp:focus{border-color:var(--orange)}
+.task-inp::placeholder{color:#C8A878;font-weight:700}
+.add-btn{background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:14px;width:46px;font-size:20px;cursor:pointer;transition:all .15s;box-shadow:0 4px 12px rgba(255,122,0,.35)}
+.add-btn:active{transform:scale(.9)}
+.task-filters{display:flex;gap:6px;margin-bottom:10px}
+.tf{border:none;border-radius:20px;padding:5px 12px;font-family:'Baloo 2',cursive;font-weight:800;font-size:11px;cursor:pointer;background:var(--light);color:var(--mid);transition:all .2s}
+.tf.active{background:var(--orange);color:white}
+.task-item{display:flex;align-items:center;gap:10px;background:var(--bg);border:2px solid var(--light);border-radius:16px;padding:11px 13px;margin-bottom:8px;transition:all .3s;animation:slideIn .2s ease-out}
+@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+.task-item.done-task{opacity:.55;background:#F5F5F5;border-color:#E0E0E0}
+.task-check{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--light);background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all .25s}
+.task-item.done-task .task-check{background:var(--green);border-color:var(--green)}
+.task-text{flex:1;font-size:13px;font-weight:800;color:var(--dark);line-height:1.3}
+.task-item.done-task .task-text{text-decoration:line-through;color:#999}
+.task-cat{font-size:10px;border-radius:8px;padding:2px 7px;font-weight:800}
+.task-del{background:none;border:none;font-size:16px;cursor:pointer;opacity:.4;transition:opacity .15s;flex-shrink:0}
+.task-del:hover{opacity:.8}
+.cat-school{background:#E3F2FD;color:#1565C0}
+.cat-habit{background:#E8F5E9;color:#1B5E20}
+.cat-play{background:#FFF3E0;color:#E65100}
+.cat-other{background:#F3E5F5;color:#4A148C}
+.task-priority{font-size:14px;flex-shrink:0}
+.task-xp{font-size:10px;font-weight:800;color:var(--orange);margin-top:2px}
+.empty-tasks{text-align:center;padding:30px;color:#C8A878}
+.empty-tasks .ei{font-size:40px;margin-bottom:8px}
+.empty-tasks p{font-weight:800;font-size:13px}
+
+/* ── HABITS ── */
+.habit-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.hcard{background:var(--bg);border:2px solid var(--light);border-radius:18px;padding:12px;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.hcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--orange),var(--orange2));opacity:0;transition:opacity .3s}
+.hcard.done-h::before{opacity:1}
+.hcard-content{position:relative;z-index:1}
+.hcard.done-h .hcard-content{color:white}
+.hcard-icon{font-size:28px;margin-bottom:5px;transition:transform .3s}
+.hcard.done-h .hcard-icon{transform:scale(1.15)}
+.hcard-name{font-size:12px;font-weight:800}
+.hcard-streak{font-size:10px;font-weight:700;margin-top:2px;opacity:.7}
+.hcard-check{position:absolute;top:6px;right:6px;font-size:14px;opacity:0;transition:opacity .3s}
+.hcard.done-h .hcard-check{opacity:1}
+.add-habit-btn{background:var(--light);border:2px dashed #C8A878;border-radius:18px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;font-family:'Baloo 2',cursive;font-weight:800;font-size:12px;color:var(--mid);width:100%;margin-top:9px}
+.add-habit-btn:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ── REWARDS ── */
+.reward-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.coins-display{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFD93D,#FFA000);border-radius:20px;padding:6px 14px}
+.coins-num{font-size:16px;font-weight:900;color:white}
+.reward-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.reward-item{background:var(--bg);border:2px solid var(--light);border-radius:16px;padding:11px;text-align:center;transition:all .2s;cursor:pointer;position:relative}
+.reward-item.owned{border-color:var(--green);background:#E8F5E9}
+.reward-item.equipped{border-color:var(--orange);background:#FFF3E0}
+.reward-icon{font-size:30px;margin-bottom:4px}
+.reward-name{font-size:11px;font-weight:800;color:var(--dark)}
+.reward-cost{font-size:11px;font-weight:800;color:#FFA000;margin-top:2px}
+.reward-owned-badge{position:absolute;top:4px;right:4px;font-size:12px}
+.achievement-list{display:flex;flex-direction:column;gap:8px}
+.ach-item{display:flex;align-items:center;gap:10px;background:var(--bg);border:2px solid var(--light);border-radius:14px;padding:10px 12px;transition:all .3s}
+.ach-item.earned{background:linear-gradient(135deg,#FFF8DC,#FFF3CD);border-color:#FFD93D}
+.ach-icon{font-size:24px;flex-shrink:0}
+.ach-info{flex:1}
+.ach-name{font-size:12px;font-weight:900}
+.ach-desc{font-size:10px;font-weight:700;color:#999;margin-top:1px}
+.ach-item.earned .ach-desc{color:var(--orange)}
+.ach-locked{opacity:.35;filter:grayscale(.6)}
+
+/* ── PARENT ── */
+.parent-pin-screen{text-align:center;padding:30px 16px}
+.pin-icon{font-size:50px;margin-bottom:12px}
+.pin-title{font-size:18px;font-weight:900;margin-bottom:6px}
+.pin-sub{font-size:12px;color:var(--mid);font-weight:700;margin-bottom:16px}
+.pin-dots{display:flex;gap:10px;justify-content:center;margin-bottom:16px}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--orange);background:white;transition:background .15s}
+.pin-dot.filled{background:var(--orange)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:240px;margin:0 auto}
+.pin-key{border:2px solid var(--light);background:white;border-radius:14px;padding:14px;font-family:'Baloo 2',cursive;font-size:20px;font-weight:900;cursor:pointer;transition:all .15s;color:var(--dark)}
+.pin-key:active{background:var(--orange);color:white;transform:scale(.93)}
+.parent-content{display:none}
+.parent-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+.pstat{background:var(--bg);border-radius:16px;padding:12px;text-align:center;border:2px solid var(--light)}
+.pstat-n{font-size:26px;font-weight:900}
+.pstat-l{font-size:10px;font-weight:800;color:var(--mid);margin-top:2px}
+.pstat.or .pstat-n{color:var(--orange)}
+.pstat.gn .pstat-n{color:var(--green)}
+.pstat.yw .pstat-n{color:#FFA000}
+.pstat.pu .pstat-n{color:var(--purple)}
+.parent-task-form{background:var(--bg);border:2px solid var(--light);border-radius:16px;padding:14px;margin-bottom:12px}
+.ptf-title{font-size:13px;font-weight:900;margin-bottom:10px;color:var(--orange)}
+.ptf-row{display:flex;gap:8px;margin-bottom:8px}
+.psel{flex:1;background:white;border:2px solid var(--light);border-radius:11px;padding:8px 10px;font-family:'Baloo 2',cursive;font-size:13px;font-weight:700;color:var(--dark);outline:none}
+.ptf-inp{width:100%;background:white;border:2px solid var(--light);border-radius:11px;padding:8px 12px;font-family:'Baloo 2',cursive;font-size:13px;font-weight:700;color:var(--dark);outline:none;margin-bottom:8px}
+.ptf-inp:focus,.psel:focus{border-color:var(--orange)}
+.ptf-btn{background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:12px;padding:9px 16px;color:white;font-family:'Baloo 2',cursive;font-weight:900;font-size:13px;cursor:pointer;width:100%;box-shadow:0 4px 12px rgba(255,122,0,.3)}
+.hist-item{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:2px solid var(--light)}
+.hist-item:last-child{border:none}
+.hdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.hinfo{flex:1}.hdate{font-size:12px;font-weight:800}.hdet{font-size:10px;font-weight:700;color:var(--mid);margin-top:1px}
+.hscore{font-size:13px;font-weight:900;color:var(--orange)}
+.week-bars{display:flex;gap:5px;align-items:flex-end;height:80px;margin-bottom:4px}
+.wbw{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.wbar{width:100%;background:var(--light);border-radius:5px 5px 0 0;transition:height .4s ease;min-height:4px}
+.wbar.td{background:linear-gradient(180deg,var(--orange),#FF5722)}
+.wday{font-size:9px;font-weight:800;color:var(--mid)}
+.wval{font-size:8px;font-weight:800;color:var(--mid)}
+
+/* ── LOGOUT ── */
+.logout-btn{background:rgba(239,68,68,.1);border:2px solid rgba(239,68,68,.3);border-radius:12px;padding:8px 14px;color:#ef4444;font-family:'Baloo 2',cursive;font-weight:800;font-size:12px;cursor:pointer;margin-top:8px}
+
+/* ── BOTTOM NAV ── */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:white;border-top:2px solid var(--light);display:flex;padding-bottom:max(6px,env(safe-area-inset-bottom));z-index:100;box-shadow:0 -4px 20px rgba(255,122,0,.1)}
+.nbtn{flex:1;border:none;background:none;cursor:pointer;padding:9px 0 4px;display:flex;flex-direction:column;align-items:center;gap:2px;color:#C8A878;font-family:'Baloo 2',cursive;font-weight:800;font-size:9px;transition:color .2s}
+.nbtn.active{color:var(--orange)}
+.nbtn .ni{font-size:20px}
+
+/* ── TOAST ── */
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%) translateY(-80px);color:white;padding:9px 20px;border-radius:20px;font-weight:900;font-size:13px;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-width:90vw;text-align:center;font-family:'Baloo 2',cursive}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── CONFETTI ── */
+.cp{position:fixed;pointer-events:none;z-index:9998;border-radius:50%;animation:cpf linear forwards}
+@keyframes cpf{from{transform:translateY(-10px) rotate(0deg) scale(1);opacity:1}to{transform:translateY(100vh) rotate(720deg) scale(.3);opacity:0}}
+
+/* ── LEVEL UP MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9990;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.show{opacity:1;pointer-events:all}
+.modal{background:white;border-radius:28px;padding:30px 24px;text-align:center;max-width:320px;width:90%;transform:scale(.8);transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal-icon{font-size:60px;margin-bottom:10px}
+.modal-title{font-size:22px;font-weight:900;color:var(--orange);margin-bottom:6px}
+.modal-sub{font-size:13px;font-weight:700;color:var(--mid);margin-bottom:18px;line-height:1.5}
+.modal-btn{background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:16px;padding:13px 0;color:white;font-family:'Baloo 2',cursive;font-weight:900;font-size:15px;cursor:pointer;width:100%;box-shadow:0 5px 16px rgba(255,122,0,.35)}
+
+/* ── MISC ── */
+.bigbtn{background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:16px;padding:13px 0;color:white;font-family:'Baloo 2',cursive;font-weight:900;font-size:14px;cursor:pointer;width:100%;box-shadow:0 5px 16px rgba(255,122,0,.3);transition:all .15s;margin-top:8px}
+.bigbtn:active{transform:scale(.97)}
+.sec-lbl{font-size:11px;font-weight:800;color:var(--mid);margin-bottom:8px;letter-spacing:1px;opacity:.7}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-icon" id="modal-icon">🐿️</div>
+    <div class="modal-title" id="modal-title">Lên cấp!</div>
+    <div class="modal-sub" id="modal-sub">Con đã lên cấp mới rồi!</div>
+    <button class="modal-btn" onclick="closeModal()">🎉 Tuyệt vời!</button>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="app-title"><span>🐿️</span> Sóc Con Dũng Cảm</div>
+    <div class="header-badges">
+      <div class="hbadge" id="hb-coins">🪙 0</div>
+      <div class="hbadge" id="hb-streak">🔥 0</div>
+    </div>
+  </div>
+  <div class="lion-area">
+    <div class="lion-wrap">
+      <div class="lion-body" id="lion-body" onclick="lionTap()">🐿️</div>
+      <div class="lion-level-badge" id="lion-lvl">1</div>
+    </div>
+    <div class="lion-info">
+      <div class="lion-name" id="lion-name">Sóc Con</div>
+      <div class="lion-msg" id="lion-msg">Cố lên! Hoàn thành nhiệm vụ để lớn mạnh hơn nha!</div>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar" style="width:0%"></div></div>
+      <div class="xp-label" id="xp-label">0 / 100 XP</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('timer')">⏱️ Timer</button>
+    <button class="tab" onclick="showTab('tasks')">📋 Nhiệm vụ</button>
+    <button class="tab" onclick="showTab('habits')">✅ Thói quen</button>
+    <button class="tab" onclick="showTab('rewards')">🎁 Phần thưởng</button>
+    <button class="tab" onclick="showTab('parent')">👨‍👩‍👧 Ba/Mẹ</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══ TIMER ═══ -->
+<div class="section active" id="tab-timer">
+  <div class="timer-card">
+    <div class="timer-mode-row">
+      <button class="tmode active" onclick="setMode(25,'focus')" id="m-focus">🎯 Tập trung 25p</button>
+      <button class="tmode" onclick="setMode(5,'short')" id="m-short">☕ Nghỉ 5p</button>
+      <button class="tmode" onclick="setMode(15,'long')" id="m-long">🌟 Nghỉ 15p</button>
+    </div>
+    <div class="timer-circle-wrap">
+      <svg class="timer-svg" viewBox="0 0 160 160">
+        <circle class="tc-bg" cx="80" cy="80" r="70"/>
+        <circle class="tc-fill" id="tc-fill" cx="80" cy="80" r="70"/>
+      </svg>
+      <div class="timer-inner">
+        <div class="timer-big" id="timer-big">25:00</div>
+        <div class="timer-tiny" id="timer-tiny">🎯 Tập trung</div>
+      </div>
+    </div>
+    <div class="timer-btns">
+      <button class="tbtn tbtn-start" id="t-start" onclick="toggleTimer()">▶ Bắt đầu</button>
+      <button class="tbtn tbtn-reset" onclick="resetTimer()">↺ Reset</button>
+    </div>
+    <div class="session-dots" id="session-dots">
+      <div class="sdot" id="sd0"></div>
+      <div class="sdot" id="sd1"></div>
+      <div class="sdot" id="sd2"></div>
+      <div class="sdot" id="sd3"></div>
+    </div>
+    <div style="color:rgba(255,255,255,.7);font-size:11px;font-weight:800;margin-top:8px" id="session-label">Buổi 1 / 4</div>
+  </div>
+  <div class="card">
+    <div class="card-title">💡 Mẹo cho con</div>
+    <div id="focus-tip" style="font-size:13px;font-weight:700;color:var(--mid);line-height:1.6">
+      Đặt điện thoại/máy tính bảng sang một bên, chỉ tập trung vào sách vở. Sóc Con Dũng Cảm cũng không bị phân tâm bởi bất cứ điều gì! 🐿️
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TASKS ═══ -->
+<div class="section" id="tab-tasks">
+  <div class="card">
+    <div class="task-add-row">
+      <input class="task-inp" id="task-inp" placeholder="Thêm nhiệm vụ..." maxlength="60" onkeydown="if(event.key==='Enter')addTask()">
+      <button class="add-btn" onclick="addTask()">➕</button>
+    </div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px">
+      <select id="task-cat" style="flex:1;background:#FFF8EE;border:2px solid var(--light);border-radius:11px;padding:7px 10px;font-family:'Baloo 2',cursive;font-size:12px;font-weight:700;color:var(--dark);outline:none">
+        <option value="school">📚 Học bài</option>
+        <option value="habit">🌿 Thói quen</option>
+        <option value="play">⚽ Vui chơi</option>
+        <option value="other">🎨 Khác</option>
+      </select>
+      <select id="task-pri" style="flex:1;background:#FFF8EE;border:2px solid var(--light);border-radius:11px;padding:7px 10px;font-family:'Baloo 2',cursive;font-size:12px;font-weight:700;color:var(--dark);outline:none">
+        <option value="high">🔴 Quan trọng</option>
+        <option value="mid">🟡 Bình thường</option>
+        <option value="low">🟢 Thư giãn</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:6px;margin-bottom:10px">
+    <button class="tf active" id="f-all" onclick="filterTasks('all')">Tất cả</button>
+    <button class="tf" id="f-todo" onclick="filterTasks('todo')">⏳ Chưa xong</button>
+    <button class="tf" id="f-done" onclick="filterTasks('done')">✅ Hoàn thành</button>
+  </div>
+
+  <div id="task-list"></div>
+  <div class="empty-tasks" id="task-empty" style="display:none"><div class="ei">📭</div><p>Chưa có nhiệm vụ nào!</p><p style="font-size:11px;margin-top:4px;color:#C8A878">Ba/Mẹ hoặc con tự thêm vào nhé</p></div>
+</div>
+
+<!-- ═══ HABITS ═══ -->
+<div class="section" id="tab-habits">
+  <div class="card">
+    <div class="card-title">✅ Thói quen hôm nay</div>
+    <div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:12px">Bấm vào thói quen để đánh dấu hoàn thành 👇</div>
+    <div class="habit-grid" id="habit-grid"></div>
+    <button class="add-habit-btn" onclick="showAddHabit()">➕ Thêm thói quen</button>
+  </div>
+  <div class="card">
+    <div class="card-title">📊 Streak thói quen tuần này</div>
+    <div id="habit-streak-list"></div>
+  </div>
+</div>
+
+<!-- ═══ REWARDS ═══ -->
+<div class="section" id="tab-rewards">
+  <div class="card">
+    <div class="reward-header">
+      <div class="card-title" style="margin-bottom:0">🎁 Cửa hàng</div>
+      <div class="coins-display"><span style="font-size:16px">🪙</span><span class="coins-num" id="shop-coins">0</span></div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:10px">Trang phục cho Sóc con của con!</div>
+    <div class="reward-grid" id="shop-grid"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">🏆 Thành tích</div>
+    <div class="achievement-list" id="ach-list"></div>
+  </div>
+</div>
+
+<!-- ═══ PARENT ═══ -->
+<div class="section" id="tab-parent">
+  <div class="parent-pin-screen" id="pin-screen">
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Khu vực Ba/Mẹ</div>
+    <div class="pin-sub">Nhập mã PIN để vào<br><span style="font-size:10px;color:#999">Mặc định: 1234</span></div>
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button>
+      <button class="pin-key" onclick="pinKey('2')">2</button>
+      <button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button>
+      <button class="pin-key" onclick="pinKey('5')">5</button>
+      <button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button>
+      <button class="pin-key" onclick="pinKey('8')">8</button>
+      <button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key" onclick="pinKey('del')" style="grid-column:1">⌫</button>
+      <button class="pin-key" onclick="pinKey('0')">0</button>
+      <button class="pin-key" onclick="pinKey('ok')" style="background:var(--orange);color:white;border-color:var(--orange)">✓</button>
+    </div>
+  </div>
+
+  <div class="parent-content" id="parent-content">
+    <div class="sec-lbl">📊 BÁO CÁO HÔM NAY</div>
+    <div class="parent-stat-grid">
+      <div class="pstat or"><div class="pstat-n" id="ps-tasks">0/0</div><div class="pstat-l">📋 Nhiệm vụ</div></div>
+      <div class="pstat gn"><div class="pstat-n" id="ps-habits">0/0</div><div class="pstat-l">✅ Thói quen</div></div>
+      <div class="pstat yw"><div class="pstat-n" id="ps-focus">0p</div><div class="pstat-l">⏱️ Tập trung</div></div>
+      <div class="pstat pu"><div class="pstat-n" id="ps-xp">0</div><div class="pstat-l">⭐ XP kiếm được</div></div>
+    </div>
+
+    <div class="sec-lbl">📅 BIỂU ĐỒ 7 NGÀY</div>
+    <div class="card" style="padding:12px">
+      <div class="week-bars" id="wbars"></div>
+      <div style="display:flex;gap:5px" id="wdays"></div>
+    </div>
+
+    <div class="sec-lbl">🎯 GIAO NHIỆM VỤ MỚI</div>
+    <div class="parent-task-form">
+      <div class="ptf-title">➕ Ba/Mẹ giao nhiệm vụ cho con</div>
+      <input class="ptf-inp" id="ptf-name" placeholder="Tên nhiệm vụ..." maxlength="60">
+      <div class="ptf-row">
+        <select class="psel" id="ptf-cat">
+          <option value="school">📚 Học bài</option>
+          <option value="habit">🌿 Thói quen</option>
+          <option value="play">⚽ Vui chơi</option>
+          <option value="other">🎨 Khác</option>
+        </select>
+        <select class="psel" id="ptf-pri">
+          <option value="high">🔴 Quan trọng</option>
+          <option value="mid">🟡 Bình thường</option>
+          <option value="low">🟢 Thư giãn</option>
+        </select>
+      </div>
+      <button class="ptf-btn" onclick="parentAddTask()">➕ Giao nhiệm vụ</button>
+    </div>
+
+    <div class="sec-lbl">📌 ĐỔI PIN</div>
+    <div class="card">
+      <div style="display:flex;gap:8px">
+        <input class="ptf-inp" id="new-pin" placeholder="PIN mới (4 số)" maxlength="4" type="number" style="margin:0;flex:1">
+        <button onclick="changePin()" style="background:var(--orange);border:none;border-radius:11px;padding:8px 14px;color:white;font-family:'Baloo 2',cursive;font-weight:800;font-size:12px;cursor:pointer">Đổi</button>
+      </div>
+    </div>
+
+    <div class="sec-lbl">🗓️ LỊCH SỬ</div>
+    <div class="card"><div id="hist-list"><div style="text-align:center;padding:14px;color:#C8A878;font-weight:800;font-size:13px">Chưa có lịch sử</div></div></div>
+
+    <button class="logout-btn" onclick="parentLogout()" style="width:100%">🔒 Khoá khu vực Ba/Mẹ</button>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /app -->
+
+<nav class="bnav">
+  <button class="nbtn active" id="nav-timer" onclick="showTab('timer')"><span class="ni">⏱️</span>Timer</button>
+  <button class="nbtn" id="nav-tasks" onclick="showTab('tasks')"><span class="ni">📋</span>Nhiệm vụ</button>
+  <button class="nbtn" id="nav-habits" onclick="showTab('habits')"><span class="ni">✅</span>Thói quen</button>
+  <button class="nbtn" id="nav-rewards" onclick="showTab('rewards')"><span class="ni">🎁</span>Phần thưởng</button>
+  <button class="nbtn" id="nav-parent" onclick="showTab('parent')"><span class="ni">👨‍👩‍👧</span>Ba/Mẹ</button>
+</nav>
+
+<script>
+// ══ DATA ══════════════════════════════════════════════════════════════════════
+let data={
+  lion:{xp:0,level:1,coins:0,streak:0,lastDay:null,equip:'default'},
+  tasks:[],habits:[],history:[],weekData:{},
+  todayXP:0,todayFocusMin:0,todaySessions:0,
+  pin:'1234',parentOpen:false
+};
+try{const s=JSON.parse(localStorage.getItem('stdc_v1')||'null');if(s)data=s;}catch{}
+
+const TODAY=new Date().toDateString();
+// Daily reset
+if(data.lion.lastDay!==TODAY){
+  if(data.lion.lastDay){
+    const y=new Date();y.setDate(y.getDate()-1);
+    const streakCont=data.lion.lastDay===y.toDateString()&&data.todayXP>0;
+    data.lion.streak=streakCont?data.lion.streak+1:0;
+    data.history.unshift({date:data.lion.lastDay,xp:data.todayXP,focus:data.todayFocusMin,tasks:data.tasks.filter(t=>t.done&&t.addedDate===data.lion.lastDay).length,habits:data.habits.filter(h=>h.doneToday).length});
+    if(data.history.length>30)data.history.pop();
+    data.weekData[data.lion.lastDay]=data.todayFocusMin;
+  }
+  // Reset daily habits
+  data.habits.forEach(h=>{
+    if(h.doneToday) h.streak=(h.streak||0)+1;
+    else h.streak=0;
+    h.doneToday=false;
+  });
+  // Clear old done tasks (keep undone)
+  data.tasks=data.tasks.filter(t=>!t.done||t.addedDate===TODAY);
+  data.todayXP=0;data.todayFocusMin=0;data.todaySessions=0;
+  data.lion.lastDay=TODAY;
+}
+function save(){localStorage.setItem('stdc_v1',JSON.stringify(data));}
+
+// ══ LION CONFIG ═══════════════════════════════════════════════════════════════
+const LEVELS=[
+  {min:0,max:100,name:'Sóc Con',msg:'Cố lên! Hoàn thành nhiệm vụ để lớn mạnh hơn!',emoji:'🐿️'},
+  {min:100,max:250,name:'Sóc Nhỏ',msg:'Con đang tiến bộ rất nhanh rồi đó!',emoji:'🐿️'},
+  {min:250,max:500,name:'Sóc Con Dũng Cảm',msg:'Tuyệt vời! Con thật sự dũng cảm!',emoji:'🐿️'},
+  {min:500,max:900,name:'Sóc Mạnh Mẽ',msg:'Con đã rất mạnh! Tiếp tục nhé!',emoji:'🐿️'},
+  {min:900,max:1400,name:'Sóc Oai Phong',msg:'Uy lực lắm! Sóc con của con thật oai!',emoji:'🐿️'},
+  {min:1400,max:9999,name:'Sóc Huyền Thoại',msg:'Con là huyền thoại thật sự! Phi thường!',emoji:'🐿️'},
+];
+const COSTUMES=[
+  {id:'default',name:'Bình thường',icon:'🐿️',cost:0},
+  {id:'crown',name:'Vương miện',icon:'👑',cost:50},
+  {id:'glasses',name:'Kính cool',icon:'🕶️',cost:80},
+  {id:'cape',name:'Áo choàng',icon:'🦸',cost:120},
+  {id:'ninja',name:'Ninja',icon:'🥷',cost:150},
+  {id:'wizard',name:'Phù thủy',icon:'🧙',cost:200},
+  {id:'knight',name:'Hiệp sĩ',icon:'⚔️',cost:250},
+  {id:'star',name:'Ngôi sao',icon:'⭐',cost:300},
+];
+const ACHIEVEMENTS=[
+  {id:'first_task',icon:'🌱',name:'Bước đầu',desc:'Hoàn thành nhiệm vụ đầu tiên',check:()=>data.tasks.some(t=>t.done)},
+  {id:'focus_1',icon:'⏱️',name:'Tập trung 1',desc:'Hoàn thành 1 pomodoro',check:()=>data.todaySessions>=1},
+  {id:'focus_4',icon:'🎯',name:'Tập trung Pro',desc:'Hoàn thành 4 pomodoro liền',check:()=>data.todaySessions>=4},
+  {id:'streak3',icon:'🔥',name:'3 ngày liên tiếp',desc:'Streak 3 ngày',check:()=>data.lion.streak>=3},
+  {id:'streak7',icon:'🌟',name:'1 tuần',desc:'Streak 7 ngày',check:()=>data.lion.streak>=7},
+  {id:'xp100',icon:'💯',name:'100 XP',desc:'Kiếm 100 XP trong 1 ngày',check:()=>data.todayXP>=100},
+  {id:'habits5',icon:'✅',name:'Chăm chỉ',desc:'Hoàn thành 5 thói quen 1 ngày',check:()=>data.habits.filter(h=>h.doneToday).length>=5},
+  {id:'level3',icon:'🏆',name:'Cấp 3',desc:'Đạt cấp độ 3',check:()=>data.lion.level>=3},
+  {id:'coins50',icon:'🪙',name:'Tiết kiệm',desc:'Có 50 xu',check:()=>data.lion.coins>=50},
+];
+let earnedAch={};
+try{earnedAch=JSON.parse(localStorage.getItem('stdc_ach')||'{}');}catch{}
+
+const DEFAULT_HABITS=[
+  {id:1,name:'Đánh răng buổi sáng',icon:'🦷',doneToday:false,streak:0},
+  {id:2,name:'Tập thể dục',icon:'🤸',doneToday:false,streak:0},
+  {id:3,name:'Đọc sách 15 phút',icon:'📚',doneToday:false,streak:0},
+  {id:4,name:'Ngủ đúng giờ',icon:'😴',doneToday:false,streak:0},
+  {id:5,name:'Ăn rau xanh',icon:'🥦',doneToday:false,streak:0},
+  {id:6,name:'Dọn dẹp phòng',icon:'🧹',doneToday:false,streak:0},
+];
+if(!data.habits.length) data.habits=[...DEFAULT_HABITS];
+
+// ══ TIMER ══════════════════════════════════════════════════════════════════════
+let timerOn=false,timerIv=null,timerSecs=0,timerTotal=25*60,timerMode='focus',sessionsDone=0;
+const TIPS=[
+  'Đặt sách vở ra trước mặt, tắt TV và điện thoại nhé! 📵',
+  'Hít thở sâu 3 lần trước khi bắt đầu học - Sư Tử cũng làm vậy! 🐿️',
+  'Viết ra giấy những thứ con cần học hôm nay rồi tick từng cái!',
+  'Không nhìn đồng hồ khi đang học - hãy tin tưởng vào timer!',
+  'Uống một ngụm nước trước khi bắt đầu để não hoạt động tốt hơn! 💧',
+  'Nếu có ý nghĩ khác, viết ra giấy rồi tiếp tục học, đừng bỏ dở!',
+  'Con làm được! Sóc Con Dũng Cảm luôn tin tưởng ở con! 🐿️',
+];
+let tipIdx=0;
+
+function setMode(mins, mode){
+  timerMode=mode;
+  timerTotal=mins*60;
+  timerSecs=0;
+  if(timerOn) stopTimer();
+  timerOn=false;
+  document.getElementById('t-start').textContent='▶ Bắt đầu';
+  updateTimerDisplay();
+  ['focus','short','long'].forEach(m=>document.getElementById('m-'+m).classList.remove('active'));
+  document.getElementById('m-'+mode).classList.add('active');
+  const labels={focus:'🎯 Tập trung',short:'☕ Nghỉ ngắn',long:'🌟 Nghỉ dài'};
+  document.getElementById('timer-tiny').textContent=labels[mode];
+  tipIdx=Math.floor(Math.random()*TIPS.length);
+  document.getElementById('focus-tip').textContent=TIPS[tipIdx];
+}
+
+function updateTimerDisplay(){
+  const rem=timerTotal-timerSecs;
+  const m=Math.floor(rem/60).toString().padStart(2,'0');
+  const s=(rem%60).toString().padStart(2,'0');
+  document.getElementById('timer-big').textContent=`${m}:${s}`;
+  const pct=timerSecs/timerTotal;
+  const circ=2*Math.PI*70;
+  document.getElementById('tc-fill').style.strokeDashoffset=circ*(1-pct);
+}
+
+function toggleTimer(){
+  if(timerOn) stopTimer();
+  else startTimerFn();
+}
+function startTimerFn(){
+  timerOn=true;
+  document.getElementById('t-start').textContent='⏸ Dừng';
+  timerIv=setInterval(()=>{
+    timerSecs++;
+    updateTimerDisplay();
+    if(timerSecs>=timerTotal){
+      timerDone();
+    }
+  },1000);
+}
+function stopTimer(){
+  timerOn=false;clearInterval(timerIv);
+  document.getElementById('t-start').textContent='▶ Bắt đầu';
+  if(timerMode==='focus'){
+    const mins=Math.floor(timerSecs/60);
+    data.todayFocusMin+=mins;save();
+  }
+}
+function resetTimer(){
+  stopTimer();timerSecs=0;updateTimerDisplay();
+  document.getElementById('t-start').textContent='▶ Bắt đầu';
+}
+function timerDone(){
+  stopTimer();timerSecs=0;updateTimerDisplay();
+  if(timerMode==='focus'){
+    sessionsDone++;data.todaySessions++;
+    if(sessionsDone>4)sessionsDone=4;
+    for(let i=0;i<4;i++){
+      const d=document.getElementById('sd'+i);
+      if(d) d.classList.toggle('done',i<sessionsDone);
+    }
+    document.getElementById('session-label').textContent=`Buổi ${Math.min(sessionsDone+1,4)} / 4`;
+    addXP(30,'⏱️ Hoàn thành pomodoro! +30 XP');
+    data.todayFocusMin+=25;save();
+    confetti(15);
+    checkAchievements();
+    showToast('🎉 Tập trung xong! +30 XP 🐿️','#FF7A00');
+    setTimeout(()=>setMode(5,'short'),1000);
+  } else {
+    showToast('☕ Nghỉ xong! Sẵn sàng học tiếp chưa?','#4CAF50');
+    setTimeout(()=>setMode(25,'focus'),1000);
+  }
+}
+updateTimerDisplay();
+
+// ══ TASKS ══════════════════════════════════════════════════════════════════════
+let taskFilter='all';
+const CAT_LABELS={school:'📚 Học bài',habit:'🌿 Thói quen',play:'⚽ Vui chơi',other:'🎨 Khác'};
+const CAT_XP={school:20,habit:15,play:10,other:12};
+const PRI_ICONS={high:'🔴',mid:'🟡',low:'🟢'};
+
+function addTask(){
+  const txt=document.getElementById('task-inp').value.trim();
+  if(!txt) return;
+  const cat=document.getElementById('task-cat').value;
+  const pri=document.getElementById('task-pri').value;
+  data.tasks.unshift({id:Date.now(),text:txt,cat,pri,done:false,addedDate:TODAY,fromParent:false});
+  document.getElementById('task-inp').value='';
+  save();renderTasks();
+  showToast('✅ Nhiệm vụ đã thêm!','#4CAF50');
+}
+
+function toggleTask(id){
+  const t=data.tasks.find(x=>x.id===id);if(!t)return;
+  if(t.done){t.done=false;save();renderTasks();return;}
+  t.done=true;
+  const xpGain=CAT_XP[t.cat]||15;
+  const coins=Math.floor(xpGain/4);
+  data.lion.coins+=coins;
+  addXP(xpGain,`🎯 Hoàn thành nhiệm vụ! +${xpGain} XP`);
+  save();renderTasks();
+  confetti(10);
+  document.getElementById('lion-body').classList.add('celebrate');
+  setTimeout(()=>document.getElementById('lion-body').classList.remove('celebrate'),600);
+  checkAchievements();
+}
+
+function deleteTask(id){data.tasks=data.tasks.filter(t=>t.id!==id);save();renderTasks();}
+
+function filterTasks(f){
+  taskFilter=f;
+  ['all','todo','done'].forEach(x=>{
+    document.getElementById('f-'+x).classList.toggle('active',x===f);
+  });
+  renderTasks();
+}
+
+function renderTasks(){
+  const today=data.tasks;
+  let filtered=today;
+  if(taskFilter==='todo') filtered=today.filter(t=>!t.done);
+  if(taskFilter==='done') filtered=today.filter(t=>t.done);
+  const el=document.getElementById('task-list');
+  document.getElementById('task-empty').style.display=filtered.length===0?'block':'none';
+  el.innerHTML=filtered.map(t=>{
+    const catClass=`cat-${t.cat}`;
+    const catLabel=CAT_LABELS[t.cat]||'🎨 Khác';
+    const xp=CAT_XP[t.cat]||15;
+    const fp=t.fromParent?'<span style="font-size:10px;background:#E3F2FD;color:#1565C0;border-radius:7px;padding:1px 7px;font-weight:800">👨‍👩‍👧 Ba/Mẹ giao</span>':'';
+    return `<div class="task-item ${t.done?'done-task':''}">
+      <div class="task-check" onclick="toggleTask(${t.id})">${t.done?'✓':''}</div>
+      <div style="flex:1">
+        <div class="task-text">${t.text}</div>
+        <div style="display:flex;gap:5px;margin-top:4px;align-items:center;flex-wrap:wrap">
+          <span class="task-cat ${catClass}">${catLabel}</span>
+          <span class="task-priority">${PRI_ICONS[t.pri]||'🟡'}</span>
+          ${fp}
+        </div>
+        ${!t.done?`<div class="task-xp">+${xp} XP khi hoàn thành</div>`:''}
+      </div>
+      <button class="task-del" onclick="deleteTask(${t.id})">🗑️</button>
+    </div>`;
+  }).join('');
+}
+
+// ══ HABITS ══════════════════════════════════════════════════════════════════
+function toggleHabit(id){
+  const h=data.habits.find(x=>x.id===id);if(!h)return;
+  if(h.doneToday){h.doneToday=false;save();renderHabits();return;}
+  h.doneToday=true;
+  addXP(15,'✅ Thói quen tốt! +15 XP');
+  data.lion.coins+=3;
+  save();renderHabits();
+  showToast(`✅ ${h.name} +15 XP! 🎉`,'#4CAF50');
+  checkAchievements();
+}
+
+function showAddHabit(){
+  const name=prompt('Tên thói quen mới:');
+  if(!name||!name.trim())return;
+  const icons=['⭐','🎵','🖊️','🧩','🏃','🥗','📝','🌈'];
+  const ic=icons[Math.floor(Math.random()*icons.length)];
+  data.habits.push({id:Date.now(),name:name.trim(),icon:ic,doneToday:false,streak:0});
+  save();renderHabits();
+  showToast(`✅ Đã thêm thói quen: ${name.trim()}`,'#4CAF50');
+}
+
+function renderHabits(){
+  const g=document.getElementById('habit-grid');
+  g.innerHTML=data.habits.map(h=>`
+    <div class="hcard ${h.doneToday?'done-h':''}" onclick="toggleHabit(${h.id})">
+      <div class="hcard-check">✓</div>
+      <div class="hcard-content">
+        <div class="hcard-icon">${h.icon}</div>
+        <div class="hcard-name">${h.name}</div>
+        <div class="hcard-streak">🔥 ${h.streak||0} ngày</div>
+      </div>
+    </div>`).join('');
+  // streak list
+  const sl=document.getElementById('habit-streak-list');
+  sl.innerHTML=data.habits.map(h=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:2px solid var(--light)">
+      <span style="font-size:18px">${h.icon}</span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:800">${h.name}</div></div>
+      <div style="font-size:12px;font-weight:900;color:${h.streak>=3?'var(--orange)':'var(--mid)'}">${h.streak>=3?'🔥':'⭕'} ${h.streak||0} ngày</div>
+    </div>`).join('');
+}
+
+// ══ REWARDS ══════════════════════════════════════════════════════════════════
+let ownedCostumes=new Set(['default']);
+try{ownedCostumes=new Set(JSON.parse(localStorage.getItem('stdc_owned')||'["default"]'));}catch{}
+
+function buyCostume(id){
+  const c=COSTUMES.find(x=>x.id===id);if(!c)return;
+  if(ownedCostumes.has(id)){equipCostume(id);return;}
+  if(data.lion.coins<c.cost){showToast(`Cần thêm ${c.cost-data.lion.coins} xu nữa! 🪙`,'#FF5252');return;}
+  data.lion.coins-=c.cost;
+  ownedCostumes.add(id);
+  localStorage.setItem('stdc_owned',JSON.stringify([...ownedCostumes]));
+  equipCostume(id);save();
+  confetti(12);showToast(`🎉 Mua được ${c.name}!`,'#FF7A00');
+}
+
+function equipCostume(id){
+  data.lion.equip=id;save();renderShop();updateLion();
+  showToast('✨ Sóc con của con trông ngầu lắm!','#7C4DFF');
+}
+
+function renderShop(){
+  document.getElementById('shop-coins').textContent=data.lion.coins;
+  document.getElementById('hb-coins').textContent=`🪙 ${data.lion.coins}`;
+  document.getElementById('shop-grid').innerHTML=COSTUMES.map(c=>{
+    const owned=ownedCostumes.has(c.id);
+    const equipped=data.lion.equip===c.id;
+    return `<div class="reward-item ${equipped?'equipped':owned?'owned':''}" onclick="buyCostume('${c.id}')">
+      ${owned?'<div class="reward-owned-badge">'+(equipped?'✅':'✓')+'</div>':''}
+      <div class="reward-icon">${c.icon}</div>
+      <div class="reward-name">${c.name}</div>
+      <div class="reward-cost">${c.cost===0?'🆓 Miễn phí':owned?'✅ Đã có':'🪙 '+c.cost}</div>
+    </div>`;
+  }).join('');
+  // achievements
+  document.getElementById('ach-list').innerHTML=ACHIEVEMENTS.map(a=>{
+    const e=earnedAch[a.id];
+    return `<div class="ach-item ${e?'earned':'ach-locked'}">
+      <div class="ach-icon">${a.icon}</div>
+      <div class="ach-info"><div class="ach-name">${a.name}</div><div class="ach-desc">${e?'✅ Đã đạt được!':a.desc}</div></div>
+    </div>`;
+  }).join('');
+}
+
+// ══ LION ══════════════════════════════════════════════════════════════════════
+function addXP(amt,msg){
+  data.lion.xp+=amt;data.todayXP+=amt;
+  // Check level up
+  let lvl=1;
+  for(let i=LEVELS.length-1;i>=0;i--){if(data.lion.xp>=LEVELS[i].min){lvl=i+1;break;}}
+  if(lvl>data.lion.level){
+    data.lion.level=lvl;
+    save();updateLion();
+    setTimeout(()=>showLevelUp(lvl),300);
+  } else {save();updateLion();}
+  if(msg) showToast(msg,'#FF7A00');
+}
+
+function updateLion(){
+  const lvl=Math.min(data.lion.level,LEVELS.length)-1;
+  const lc=LEVELS[lvl];
+  const nextLvl=LEVELS[Math.min(lvl+1,LEVELS.length-1)];
+  const pct=Math.min(100,((data.lion.xp-lc.min)/(nextLvl.min-lc.min||1))*100);
+  const costume=COSTUMES.find(c=>c.id===data.lion.equip)||COSTUMES[0];
+  document.getElementById('lion-body').textContent=costume.icon;
+  document.getElementById('lion-lvl').textContent=data.lion.level;
+  document.getElementById('lion-name').textContent=lc.name;
+  document.getElementById('lion-msg').textContent=lc.msg;
+  document.getElementById('xp-bar').style.width=pct+'%';
+  document.getElementById('xp-label').textContent=`${data.lion.xp} / ${nextLvl.min} XP`;
+  document.getElementById('hb-coins').textContent=`🪙 ${data.lion.coins}`;
+  document.getElementById('hb-streak').textContent=`🔥 ${data.lion.streak}`;
+}
+
+function lionTap(){
+  const msgs=['Gầm! 🐿️','Tao là Sóc Con Dũng Cảm!','Cố lên nào!','Mình làm được mà!','ROAR! 💪'];
+  showToast(msgs[Math.floor(Math.random()*msgs.length)],'#FF7A00');
+  document.getElementById('lion-body').classList.add('celebrate');
+  setTimeout(()=>document.getElementById('lion-body').classList.remove('celebrate'),500);
+}
+
+function showLevelUp(lvl){
+  const lc=LEVELS[Math.min(lvl-1,LEVELS.length-1)];
+  document.getElementById('modal-icon').textContent='🎊';
+  document.getElementById('modal-title').textContent=`Lên cấp ${lvl}!`;
+  document.getElementById('modal-sub').textContent=`Con đã trở thành ${lc.name}!\n${lc.msg}`;
+  document.getElementById('modal').classList.add('show');
+  confetti(25);
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+
+// ══ PARENT PIN ══════════════════════════════════════════════════════════════
+let pinBuffer='';
+function pinKey(k){
+  if(k==='del'){pinBuffer=pinBuffer.slice(0,-1);}
+  else if(k==='ok'){checkPin();}
+  else if(pinBuffer.length<4){pinBuffer+=k;}
+  for(let i=0;i<4;i++){
+    const d=document.getElementById('pd'+i);
+    if(d)d.classList.toggle('filled',i<pinBuffer.length);
+  }
+}
+function checkPin(){
+  if(pinBuffer===data.pin){
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('parent-content').style.display='block';
+    data.parentOpen=true;
+    renderParent();
+    showToast('✅ Đã vào khu vực Ba/Mẹ','#4CAF50');
+  }else{
+    showToast('❌ PIN sai rồi!','#FF5252');
+    pinBuffer='';
+    for(let i=0;i<4;i++){const d=document.getElementById('pd'+i);if(d)d.classList.remove('filled');}
+  }
+}
+function parentLogout(){
+  document.getElementById('pin-screen').style.display='block';
+  document.getElementById('parent-content').style.display='none';
+  data.parentOpen=false;pinBuffer='';
+  for(let i=0;i<4;i++){const d=document.getElementById('pd'+i);if(d)d.classList.remove('filled');}
+}
+function changePin(){
+  const np=document.getElementById('new-pin').value;
+  if(!/^\d{4}$/.test(np)){showToast('PIN phải là 4 chữ số!','#FF5252');return;}
+  data.pin=np;save();
+  document.getElementById('new-pin').value='';
+  showToast('✅ Đã đổi PIN thành công!','#4CAF50');
+}
+function parentAddTask(){
+  const txt=document.getElementById('ptf-name').value.trim();
+  if(!txt)return;
+  const cat=document.getElementById('ptf-cat').value;
+  const pri=document.getElementById('ptf-pri').value;
+  data.tasks.unshift({id:Date.now(),text:txt,cat,pri,done:false,addedDate:TODAY,fromParent:true});
+  document.getElementById('ptf-name').value='';
+  save();renderTasks();
+  showToast('✅ Đã giao nhiệm vụ cho con!','#4CAF50');
+}
+
+function renderParent(){
+  const doneTasks=data.tasks.filter(t=>t.done).length;
+  const totalTasks=data.tasks.length;
+  const doneHabits=data.habits.filter(h=>h.doneToday).length;
+  document.getElementById('ps-tasks').textContent=`${doneTasks}/${totalTasks}`;
+  document.getElementById('ps-habits').textContent=`${doneHabits}/${data.habits.length}`;
+  document.getElementById('ps-focus').textContent=`${data.todayFocusMin}p`;
+  document.getElementById('ps-xp').textContent=data.todayXP;
+  // Week chart
+  const DAYS=['CN','T2','T3','T4','T5','T6','T7'];
+  const bw=document.getElementById('wbars'),dw=document.getElementById('wdays');
+  bw.innerHTML='';dw.innerHTML='';
+  for(let i=6;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const key=d.toDateString();const isT=i===0;
+    const mins=isT?data.todayFocusMin:(data.weekData[key]||0);
+    const h=Math.max(4,Math.round((mins/120)*76));
+    bw.innerHTML+=`<div class="wbw"><div class="wval">${mins}p</div><div class="wbar${isT?' td':''}" style="height:${h}px"></div></div>`;
+    dw.innerHTML+=`<div class="wbw"><div class="wday" style="${isT?'color:var(--orange)':''}">${isT?'Hôm nay':DAYS[d.getDay()]}</div></div>`;
+  }
+  // History
+  const hl=document.getElementById('hist-list');
+  const C=['#FF7A00','#4CAF50','#FFD93D','#7C4DFF','#2196F3'];
+  if(!data.history.length){hl.innerHTML='<div style="text-align:center;padding:12px;color:#C8A878;font-weight:800;font-size:13px">Chưa có lịch sử</div>';return;}
+  hl.innerHTML=data.history.slice(0,10).map((h,i)=>{
+    const d=new Date(h.date);const lbl=`${d.getDate()}/${d.getMonth()+1}`;
+    return `<div class="hist-item"><div class="hdot" style="background:${C[i%5]}"></div><div class="hinfo"><div class="hdate">${lbl}</div><div class="hdet">⏱️${h.focus||0}p · 📋${h.tasks||0} nhiệm vụ · ✅${h.habits||0} thói quen</div></div><div class="hscore">${h.xp}XP</div></div>`;
+  }).join('');
+}
+
+// ══ ACHIEVEMENTS ══════════════════════════════════════════════════════════════
+function checkAchievements(){
+  let newOne=false;
+  ACHIEVEMENTS.forEach(a=>{
+    if(!earnedAch[a.id]&&a.check()){
+      earnedAch[a.id]=true;newOne=true;
+      setTimeout(()=>{showToast(`🏆 Thành tích: ${a.name}!`,'#FFD93D');confetti(15);},300);
+    }
+  });
+  if(newOne){localStorage.setItem('stdc_ach',JSON.stringify(earnedAch));renderShop();}
+}
+
+// ══ TABS ══════════════════════════════════════════════════════════════════════
+const TABS=['timer','tasks','habits','rewards','parent'];
+function showTab(name){
+  TABS.forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active',t===name);
+    document.getElementById('nav-'+t).classList.toggle('active',t===name);
+  });
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',TABS[i]===name));
+  if(name==='rewards') renderShop();
+  if(name==='parent'){
+    if(!data.parentOpen){
+      document.getElementById('pin-screen').style.display='block';
+      document.getElementById('parent-content').style.display='none';
+    } else renderParent();
+  }
+  if(name==='habits') renderHabits();
+  if(name==='tasks') renderTasks();
+}
+
+// ══ TOAST & CONFETTI ══════════════════════════════════════════════════════════
+let tt;
+function showToast(m,c='#FF7A00'){const t=document.getElementById('toast');t.textContent=m;t.style.background=c;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2500);}
+function confetti(n=15){
+  const C=['#FF7A00','#FFD93D','#4CAF50','#2196F3','#7C4DFF','#FF5252'];
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div');d.className='cp';
+    const sz=6+Math.random()*10;
+    d.style.cssText=`left:${Math.random()*100}vw;top:-20px;width:${sz}px;height:${sz}px;background:${C[Math.floor(Math.random()*C.length)]};animation-duration:${1.2+Math.random()*1.5}s;animation-delay:${Math.random()*0.3}s;`;
+    document.body.appendChild(d);setTimeout(()=>d.remove(),3000);
+  }
+}
+
+// ══ INIT ══════════════════════════════════════════════════════════════════════
+updateLion();renderTasks();renderHabits();renderShop();
+</script>
+</body>
+</html>
